@@ -155,7 +155,7 @@ describe('pages publiées', () => {
 
     // « Les outils » : la roue (copie dans le dépôt, décorative) et son nom, dans le même onglet
     const outils = texte.match(/<a class="lien-outils[^"]*"[^>]*>.*?<\/a>/)?.[0];
-    expect(outils).toContain('href="https://gharel.github.io/home/"');
+    expect(outils).toContain('href="https://gharel.github.io/pro/"');
     expect(outils).toContain('title="Tous les outils Skazy Formation"');
     expect(outils).not.toContain('target=');
     const roue = outils.match(/<img class="lien-outils__roue" [^>]*>/)?.[0];

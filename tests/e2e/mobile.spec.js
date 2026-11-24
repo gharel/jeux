@@ -271,7 +271,7 @@ for (const largeur of [390, 360]) {
       await expect(bandeau.getByRole('link', { name: 'Accueil', exact: true })).toBeVisible();
       await expect(bandeau.getByRole('link', { name: 'Mini-jeux', exact: true })).toBeVisible();
       const outils = bandeau.getByRole('link', { name: 'Les outils', exact: true });
-      await expect(outils).toHaveAttribute('href', 'https://gharel.github.io/home/');
+      await expect(outils).toHaveAttribute('href', 'https://gharel.github.io/pro/');
       // Zone de toucher d'au moins 40 px
       const zone = await outils.boundingBox();
       expect(Math.min(zone.width, zone.height)).toBeGreaterThanOrEqual(40);

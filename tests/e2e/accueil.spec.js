@@ -30,7 +30,7 @@ test('l’accueil présente un jeu par carte, avec un lien qui fonctionne', asyn
   );
   await expect(page.getByRole('link', { name: 'Les outils', exact: true })).toHaveAttribute(
     'href',
-    'https://gharel.github.io/home/',
+    'https://gharel.github.io/pro/',
   );
 
   await page.getByRole('link', { name: JEUX[0].titre }).click();
@@ -45,7 +45,7 @@ test('l’accueil présente un jeu par carte, avec un lien qui fonctionne', asyn
   await expect(liens).toHaveText(['Accueil', 'Mini-jeux', 'Les outils', '']);
   await expect(liens.last()).toHaveAccessibleName('Site de Skazy Formation (nouvel onglet)');
   const outils = bandeau.getByRole('link', { name: 'Les outils', exact: true });
-  await expect(outils).toHaveAttribute('href', 'https://gharel.github.io/home/');
+  await expect(outils).toHaveAttribute('href', 'https://gharel.github.io/pro/');
   await expect(outils).not.toHaveAttribute('target');
   const droites = await bandeau
     .locator('a, button')
