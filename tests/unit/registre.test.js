@@ -118,6 +118,22 @@ describe('pages publiées', () => {
     },
   );
 
+  // Défense en profondeur : aucun script en ligne ni externe, aucune ressource hors du site.
+  // 'unsafe-inline' reste permis pour les styles : le mode nuit de Brave (Dark Reader) en ajoute.
+  it.each(pages)('%s : politique de sécurité du contenu (CSP)', (page) => {
+    const html = readFileSync(racine + page, 'utf8');
+    const politique = html.match(
+      /<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"\s+\/>/,
+    )?.[1];
+    expect(politique).toBe(
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+    );
+    // Placée avant tout script et toute feuille de style
+    expect(html.indexOf('Content-Security-Policy')).toBeLessThan(html.indexOf('<link'));
+    expect(html).not.toMatch(/<script(?![^>]*\ssrc=)[^>]*>/);
+    expect(html).not.toMatch(/\son[a-z]+="/);
+  });
+
   // Titre commun aux outils Skazy Formation : « Page · Nom · Skazy Formation »
   it.each(pages)('%s : titre d’onglet « Page · Mini-jeux · Skazy Formation »', (page) => {
     const html = readFileSync(racine + page, 'utf8');
